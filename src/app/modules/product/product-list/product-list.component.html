@@ -1,0 +1,66 @@
+<div>
+  <div class="d-flex flex-row-reverse">
+    <button
+      type="button"
+      class="btn btn-success p-2"
+      (click)="navigateCreateProduct()"
+    >
+      Ürün Ekle
+    </button>
+  </div>
+  <table class="table table-sm">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Adı</th>
+        <th scope="col">Kategori Adı</th>
+        <th scope="col">Alış Fiyatı</th>
+        <th scope="col">Satış Fiyatı</th>
+        <th scope="col">Kritik Stok</th>
+        <th scope="col">Stok Adedi</th>
+        <th scope="col">Ayarlar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productList; let i = index">
+        <th scope="row">{{ convertToOrdinal(i) }}</th>
+        <td>{{ product.productName }}</td>
+        <td>
+          <ng-container *ngFor="let category of categoryList">
+            <ng-container *ngIf="product.categoryId === category.id">
+              {{ category.categoryName }}
+            </ng-container>
+          </ng-container>
+        </td>
+        <td>{{ product.costPrice | currency : "" : "" : "1.0-0" }}₺</td>
+        <td>{{ product.unitPrice | currency : "" : "" : "1.0-0" }}₺</td>
+        <td>Kritik stok</td>
+        <td>{{ product.quantity }} Adet</td>
+        <td>
+          <button
+            class="btn btn-warning me-2"
+            (click)="navigateUpdateProduct()"
+          >
+            Güncelle
+          </button>
+          <button class="btn btn-danger" type="submit">Sil</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item disabled">
+        <a class="page-link" href="#" tabindex="-1" aria-disabled="true"
+          >Previous</a
+        >
+      </li>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
